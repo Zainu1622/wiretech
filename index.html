@@ -1,0 +1,1347 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Wire Tech Electrical — Professional Electrical Services</title>
+
+  <!-- Google Fonts: Oswald (bold display) + DM Sans (clean body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── RESET & TOKENS ────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --yellow:     #F5C518;
+      --yellow-dk:  #D9A900;
+      --yellow-lt:  #FFF3B0;
+      --black:      #0A0A0A;
+      --black-soft: #141414;
+      --charcoal:   #1E1E1E;
+      --steel:      #2C2C2C;
+      --warm-grey:  #3A3A3A;
+      --mid-grey:   #888;
+      --light-grey: #CCC;
+      --white:      #FAFAFA;
+
+      --font-display: 'Oswald', sans-serif;
+      --font-body:    'DM Sans', sans-serif;
+
+      --radius-sm:  6px;
+      --radius-md:  12px;
+      --radius-lg:  20px;
+
+      --shadow-card: 0 4px 32px rgba(0,0,0,0.5);
+      --shadow-glow: 0 0 40px rgba(245, 197, 24, 0.18);
+      --shadow-btn:  0 4px 20px rgba(245, 197, 24, 0.4);
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--font-body);
+      background-color: var(--black);
+      color: var(--white);
+      overflow-x: hidden;
+      cursor: default;
+    }
+
+    /* ─── SCROLLBAR ─────────────────────────────────────────────────────── */
+    ::-webkit-scrollbar { width: 5px; }
+    ::-webkit-scrollbar-track { background: var(--black); }
+    ::-webkit-scrollbar-thumb { background: var(--yellow); border-radius: 3px; }
+
+    /* ─── UTILITY ───────────────────────────────────────────────────────── */
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+    .accent    { color: var(--yellow); }
+
+    /* ─── ANIMATED BACKGROUND GRID ─────────────────────────────────────── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(245,197,24,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(245,197,24,0.035) 1px, transparent 1px);
+      background-size: 60px 60px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* ─── NAV ───────────────────────────────────────────────────────────── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(10,10,10,0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid rgba(245,197,24,0.12);
+      padding: 0 24px;
+    }
+
+    .nav-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      width: 42px; height: 42px;
+      background: var(--yellow);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .logo-icon::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+    }
+
+    /* Lightning bolt SVG inside logo */
+    .logo-bolt {
+      width: 20px; height: 20px;
+      fill: var(--black);
+      position: relative; z-index: 1;
+    }
+
+    .logo-text {
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      color: var(--white);
+      text-transform: uppercase;
+    }
+
+    .logo-text span { color: var(--yellow); }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      color: var(--light-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover { color: var(--yellow); }
+
+    .nav-cta {
+      background: var(--yellow);
+      color: var(--black) !important;
+      padding: 10px 22px;
+      border-radius: var(--radius-sm);
+      font-weight: 600 !important;
+      transition: background 0.2s, box-shadow 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--yellow-dk) !important;
+      color: var(--black) !important;
+      box-shadow: var(--shadow-btn) !important;
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 4px;
+    }
+    .nav-toggle span {
+      display: block;
+      width: 24px; height: 2px;
+      background: var(--yellow);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+
+    /* ─── HERO ──────────────────────────────────────────────────────────── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 120px 24px 80px;
+      overflow: hidden;
+    }
+
+    /* Diagonal slash accent */
+    #hero::after {
+      content: '';
+      position: absolute;
+      top: 0; right: -80px;
+      width: 55%;
+      height: 100%;
+      background: linear-gradient(160deg, rgba(245,197,24,0.07) 0%, transparent 65%);
+      transform: skewX(-8deg);
+      pointer-events: none;
+    }
+
+    /* Large background text */
+    .hero-bg-text {
+      position: absolute;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: var(--font-display);
+      font-size: clamp(80px, 18vw, 220px);
+      font-weight: 700;
+      letter-spacing: -4px;
+      color: rgba(245,197,24,0.03);
+      white-space: nowrap;
+      pointer-events: none;
+      user-select: none;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(245,197,24,0.1);
+      border: 1px solid rgba(245,197,24,0.25);
+      border-radius: 100px;
+      padding: 6px 16px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.6s ease both;
+    }
+
+    .hero-tag::before {
+      content: '';
+      width: 7px; height: 7px;
+      background: var(--yellow);
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(48px, 8vw, 92px);
+      font-weight: 700;
+      line-height: 1.0;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      animation: fadeSlideDown 0.6s 0.1s ease both;
+    }
+
+    .hero-headline em {
+      font-style: normal;
+      color: var(--yellow);
+      display: block;
+    }
+
+    .hero-sub {
+      font-size: 17px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid-grey);
+      max-width: 520px;
+      margin-bottom: 44px;
+      animation: fadeSlideDown 0.6s 0.2s ease both;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+      animation: fadeSlideDown 0.6s 0.3s ease both;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: var(--yellow);
+      color: var(--black);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 16px 32px;
+      border-radius: var(--radius-sm);
+      text-decoration: none;
+      transition: background 0.2s, box-shadow 0.2s, transform 0.15s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn-primary:hover {
+      background: var(--yellow-dk);
+      box-shadow: var(--shadow-btn);
+      transform: translateY(-2px);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: transparent;
+      color: var(--white);
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      padding: 15px 28px;
+      border-radius: var(--radius-sm);
+      border: 1px solid rgba(255,255,255,0.15);
+      text-decoration: none;
+      transition: border-color 0.2s, color 0.2s;
+    }
+
+    .btn-ghost:hover {
+      border-color: var(--yellow);
+      color: var(--yellow);
+    }
+
+    /* Hero right graphic */
+    .hero-graphic {
+      position: absolute;
+      right: 0; top: 50%;
+      transform: translateY(-50%);
+      width: 420px;
+      animation: fadeSlideLeft 0.8s 0.4s ease both;
+      z-index: 1;
+    }
+
+    /* ─── TRUST BAR ─────────────────────────────────────────────────────── */
+    .trust-bar {
+      position: relative;
+      z-index: 2;
+      background: var(--charcoal);
+      border-top: 1px solid rgba(245,197,24,0.12);
+      border-bottom: 1px solid rgba(245,197,24,0.12);
+      padding: 20px 24px;
+    }
+
+    .trust-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--mid-grey);
+      white-space: nowrap;
+    }
+
+    .trust-item svg {
+      width: 18px; height: 18px;
+      fill: var(--yellow);
+      flex-shrink: 0;
+    }
+
+    /* ─── SECTION SHARED ────────────────────────────────────────────────── */
+    section { position: relative; z-index: 1; }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      margin-bottom: 12px;
+    }
+
+    .section-title {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 5vw, 52px);
+      font-weight: 700;
+      letter-spacing: -0.5px;
+      text-transform: uppercase;
+      line-height: 1.1;
+      margin-bottom: 16px;
+    }
+
+    .section-sub {
+      font-size: 16px;
+      font-weight: 300;
+      color: var(--mid-grey);
+      line-height: 1.7;
+      max-width: 540px;
+    }
+
+    /* ─── SERVICES ──────────────────────────────────────────────────────── */
+    #services {
+      padding: 100px 24px;
+      background: var(--black-soft);
+    }
+
+    .services-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 40px;
+      flex-wrap: wrap;
+      margin-bottom: 64px;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2px;
+    }
+
+    /* Service card — industrial tile style */
+    .service-card {
+      position: relative;
+      background: var(--charcoal);
+      padding: 44px 36px;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+
+    .service-card:hover { background: var(--steel); }
+
+    /* Hover accent bar — left side */
+    .service-card::before {
+      content: '';
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 3px;
+      background: var(--yellow);
+      transform: scaleY(0);
+      transform-origin: bottom;
+      transition: transform 0.35s ease;
+    }
+
+    .service-card:hover::before { transform: scaleY(1); }
+
+    /* Number watermark */
+    .card-num {
+      position: absolute;
+      top: 20px; right: 24px;
+      font-family: var(--font-display);
+      font-size: 56px;
+      font-weight: 700;
+      color: rgba(245,197,24,0.05);
+      line-height: 1;
+      user-select: none;
+      transition: color 0.3s;
+    }
+
+    .service-card:hover .card-num { color: rgba(245,197,24,0.1); }
+
+    .card-icon {
+      width: 52px; height: 52px;
+      background: rgba(245,197,24,0.1);
+      border-radius: var(--radius-sm);
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 24px;
+      transition: background 0.3s;
+    }
+
+    .service-card:hover .card-icon { background: rgba(245,197,24,0.18); }
+
+    .card-icon svg {
+      width: 26px; height: 26px;
+      stroke: var(--yellow);
+      fill: none;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .card-title {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+      color: var(--white);
+    }
+
+    .card-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid-grey);
+    }
+
+    .card-arrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--yellow);
+      opacity: 0;
+      transform: translateX(-8px);
+      transition: opacity 0.3s, transform 0.3s;
+    }
+
+    .service-card:hover .card-arrow {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── ABOUT / STATS ─────────────────────────────────────────────────── */
+    #about {
+      padding: 100px 24px;
+      background: var(--black);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .about-img {
+      position: relative;
+    }
+
+    /* Decorative electrical circuit art */
+    .circuit-art {
+      width: 100%;
+      aspect-ratio: 1;
+      background: var(--charcoal);
+      border-radius: var(--radius-lg);
+      border: 1px solid rgba(245,197,24,0.12);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .circuit-art::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse at 30% 40%, rgba(245,197,24,0.08) 0%, transparent 70%);
+    }
+
+    .circuit-svg {
+      width: 80%;
+      opacity: 0.6;
+    }
+
+    .stats-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 48px;
+    }
+
+    .stat-box {
+      background: var(--charcoal);
+      border: 1px solid rgba(245,197,24,0.1);
+      border-radius: var(--radius-md);
+      padding: 28px 24px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 2px;
+      background: var(--yellow);
+      transform: scaleX(0);
+      transition: transform 0.4s ease;
+    }
+
+    .stat-box:hover::after { transform: scaleX(1); }
+
+    .stat-value {
+      font-family: var(--font-display);
+      font-size: 44px;
+      font-weight: 700;
+      color: var(--yellow);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--mid-grey);
+    }
+
+    /* ─── WHY SECTION ───────────────────────────────────────────────────── */
+    #why {
+      padding: 100px 24px;
+      background: var(--black-soft);
+    }
+
+    .why-head { text-align: center; margin-bottom: 64px; }
+    .why-head .section-sub { margin: 0 auto; }
+
+    .why-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+    }
+
+    .why-card {
+      background: var(--charcoal);
+      border-radius: var(--radius-md);
+      padding: 36px 28px;
+      border: 1px solid rgba(245,197,24,0.07);
+      transition: border-color 0.3s, box-shadow 0.3s, transform 0.3s;
+    }
+
+    .why-card:hover {
+      border-color: rgba(245,197,24,0.25);
+      box-shadow: var(--shadow-glow);
+      transform: translateY(-4px);
+    }
+
+    .why-icon {
+      font-size: 32px;
+      margin-bottom: 16px;
+      display: block;
+    }
+
+    .why-title {
+      font-family: var(--font-display);
+      font-size: 17px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 10px;
+      color: var(--white);
+    }
+
+    .why-desc {
+      font-size: 14px;
+      font-weight: 300;
+      line-height: 1.7;
+      color: var(--mid-grey);
+    }
+
+    /* ─── CTA BANNER ────────────────────────────────────────────────────── */
+    #contact {
+      padding: 100px 24px;
+      background: var(--black);
+    }
+
+    .cta-box {
+      background: var(--charcoal);
+      border: 1px solid rgba(245,197,24,0.15);
+      border-radius: var(--radius-lg);
+      padding: 72px 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 40px;
+      flex-wrap: wrap;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .cta-box::before {
+      content: '';
+      position: absolute;
+      top: -60px; right: -60px;
+      width: 300px; height: 300px;
+      background: radial-gradient(circle, rgba(245,197,24,0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .cta-box::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 100%; height: 3px;
+      background: linear-gradient(90deg, var(--yellow), transparent);
+    }
+
+    .cta-text { flex: 1; min-width: 260px; }
+
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+      margin-bottom: 14px;
+    }
+
+    .cta-sub {
+      font-size: 15px;
+      font-weight: 300;
+      color: var(--mid-grey);
+      line-height: 1.6;
+    }
+
+    .cta-actions {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 12px;
+      flex-shrink: 0;
+    }
+
+    .phone-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--yellow);
+      letter-spacing: 1px;
+    }
+
+    .phone-tag svg {
+      width: 20px; height: 20px;
+      stroke: var(--yellow);
+      fill: none;
+      stroke-width: 2;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────────────── */
+    footer {
+      background: var(--black-soft);
+      border-top: 1px solid rgba(245,197,24,0.1);
+      padding: 48px 24px;
+    }
+
+    .footer-inner {
+      max-width: 1160px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-copy {
+      font-size: 13px;
+      color: var(--warm-grey);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .footer-links a {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--warm-grey);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover { color: var(--yellow); }
+
+    /* ─── ANIMATIONS ────────────────────────────────────────────────────── */
+    @keyframes fadeSlideDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeSlideLeft {
+      from { opacity: 0; transform: translate(40px, -50%); }
+      to   { opacity: 1; transform: translate(0, -50%); }
+    }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.4; }
+    }
+
+    /* Scroll reveal */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; }
+      .about-img { display: none; }
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .hero-graphic { display: none; }
+      .nav-links { display: none; }
+      .nav-toggle { display: flex; }
+      .cta-actions { align-items: flex-start; }
+    }
+
+    @media (max-width: 600px) {
+      .trust-inner { justify-content: center; }
+      .why-grid { grid-template-columns: 1fr; }
+      .services-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr; }
+      .cta-box { padding: 40px 28px; }
+      .hero-actions { flex-direction: column; }
+    }
+
+    /* ─── MOBILE NAV OPEN ───────────────────────────────────────────────── */
+    nav.open .nav-links {
+      display: flex;
+      flex-direction: column;
+      position: absolute;
+      top: 68px; left: 0; right: 0;
+      background: rgba(10,10,10,0.98);
+      padding: 24px;
+      gap: 20px;
+      border-bottom: 1px solid rgba(245,197,24,0.12);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVIGATION ──────────────────────────────────────────────────────────── -->
+<nav id="mainNav">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="logo-icon">
+        <svg class="logo-bolt" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+        </svg>
+      </div>
+      <span class="logo-text">Wire<span>Tech</span></span>
+    </a>
+
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact" class="nav-cta">Get in Touch</a></li>
+    </ul>
+
+    <div class="nav-toggle" id="navToggle" onclick="toggleNav()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ─── HERO ────────────────────────────────────────────────────────────────── -->
+<section id="hero">
+  <div class="hero-bg-text">ELECTRIC</div>
+
+  <div class="container hero-content">
+    <h1 class="hero-headline">
+      Power Your <em>World</em>
+    </h1>
+
+    <p class="hero-sub">
+      Wire Tech Electrical delivers expert electrical solutions for residential and
+      commercial properties — from simple repairs to full system installations.
+      Reliable. Safe. Done right the first time.
+    </p>
+
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/>
+        </svg>
+      </a>
+      <a href="#services" class="btn-ghost">View Services</a>
+    </div>
+  </div>
+
+  <!-- Right decorative SVG — electrical schematic style -->
+  <div class="hero-graphic">
+    <svg viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" opacity="0.12">
+      <!-- Circuit board trace decoration -->
+      <line x1="20" y1="200" x2="100" y2="200" stroke="#F5C518" stroke-width="2"/>
+      <line x1="100" y1="200" x2="100" y2="120" stroke="#F5C518" stroke-width="2"/>
+      <line x1="100" y1="120" x2="200" y2="120" stroke="#F5C518" stroke-width="2"/>
+      <line x1="200" y1="120" x2="200" y2="60" stroke="#F5C518" stroke-width="2"/>
+      <line x1="200" y1="60" x2="320" y2="60" stroke="#F5C518" stroke-width="2"/>
+      <line x1="320" y1="60" x2="320" y2="200" stroke="#F5C518" stroke-width="2"/>
+      <line x1="320" y1="200" x2="380" y2="200" stroke="#F5C518" stroke-width="2"/>
+      <line x1="200" y1="120" x2="200" y2="200" stroke="#F5C518" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="200" y1="200" x2="200" y2="320" stroke="#F5C518" stroke-width="2"/>
+      <line x1="200" y1="320" x2="100" y2="320" stroke="#F5C518" stroke-width="2"/>
+      <line x1="100" y1="320" x2="100" y2="200" stroke="#F5C518" stroke-width="1" stroke-dasharray="4 4"/>
+      <line x1="200" y1="320" x2="320" y2="320" stroke="#F5C518" stroke-width="2"/>
+      <line x1="320" y1="320" x2="320" y2="200" stroke="#F5C518" stroke-width="1" stroke-dasharray="4 4"/>
+      <!-- Nodes -->
+      <circle cx="100" cy="200" r="6" fill="#F5C518"/>
+      <circle cx="200" cy="120" r="6" fill="#F5C518"/>
+      <circle cx="200" cy="200" r="10" fill="#F5C518"/>
+      <circle cx="200" cy="320" r="6" fill="#F5C518"/>
+      <circle cx="320" cy="200" r="6" fill="#F5C518"/>
+      <circle cx="320" cy="60" r="4" fill="none" stroke="#F5C518" stroke-width="2"/>
+      <circle cx="100" cy="120" r="4" fill="none" stroke="#F5C518" stroke-width="2"/>
+      <!-- Lightning bolt center -->
+      <path d="M210 170 L195 202 L205 202 L190 232 L210 196 L200 196 Z" fill="#F5C518"/>
+    </svg>
+  </div>
+</section>
+
+
+<!-- ─── TRUST BAR ────────────────────────────────────────────────────────────── -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+      NEC Code Compliant
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      24/7 Emergency Response
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+      15+ Years Experience
+    </div>
+    <div class="trust-item">
+      <svg viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+      5-Star Rated Service
+    </div>
+  </div>
+</div>
+
+
+<!-- ─── SERVICES ─────────────────────────────────────────────────────────────── -->
+<section id="services">
+  <div class="container">
+    <div class="services-head reveal">
+      <div>
+        <p class="section-label">What We Do</p>
+        <h2 class="section-title">Our Services</h2>
+        <p class="section-sub">Complete electrical solutions for homes and businesses, delivered by professionals.</p>
+      </div>
+      <a href="#contact" class="btn-primary" style="flex-shrink:0;">Request Service →</a>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="services-grid">
+
+      <!-- 01 -->
+      <div class="service-card reveal reveal-delay-1">
+        <span class="card-num">01</span>
+        <div class="card-icon">
+          <!-- Wiring icon -->
+          <svg viewBox="0 0 24 24">
+            <path d="M5 12h14M12 5l7 7-7 7"/>
+            <circle cx="5" cy="12" r="2"/>
+            <path d="M3 7v10"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Wiring &amp; Rewiring</h3>
+        <p class="card-desc">Complete new wiring installations and full rewiring of older properties. We ensure all work meets current safety codes and delivers reliable, long-lasting performance.</p>
+      </div>
+
+      <!-- 02 -->
+      <div class="service-card reveal reveal-delay-2">
+        <span class="card-num">02</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 1v4M12 19v4M4.22 4.22l2.83 2.83M16.95 16.95l2.83 2.83M1 12h4M19 12h4M4.22 19.78l2.83-2.83M16.95 7.05l2.83-2.83"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Lighting Installation &amp; Repair</h3>
+        <p class="card-desc">From recessed lighting to chandeliers, we handle all types of lighting installs and repairs. Upgrade your space with energy-efficient LED solutions that save you money.</p>
+      </div>
+
+      <!-- 03 -->
+      <div class="service-card reveal reveal-delay-3">
+        <span class="card-num">03</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="7" width="20" height="15" rx="2"/>
+            <path d="M16 7V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v2"/>
+            <line x1="12" y1="12" x2="12" y2="16"/>
+            <line x1="10" y1="14" x2="14" y2="14"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Outlet &amp; Switch Installation</h3>
+        <p class="card-desc">Install new outlets, GFCI protection, USB charging ports, and smart switches throughout your property. Safe, clean, and professionally finished.</p>
+      </div>
+
+      <!-- 04 -->
+      <div class="service-card reveal reveal-delay-1">
+        <span class="card-num">04</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <rect x="2" y="2" width="8" height="8" rx="1"/>
+            <rect x="14" y="2" width="8" height="8" rx="1"/>
+            <rect x="2" y="14" width="8" height="8" rx="1"/>
+            <path d="M18 14v4M16 16h4"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Electrical Panel Upgrades</h3>
+        <p class="card-desc">Outdated panels are a fire hazard. We replace old fuse boxes and upgrade to modern breaker panels to safely handle today's electrical demands.</p>
+      </div>
+
+      <!-- 05 -->
+      <div class="service-card reveal reveal-delay-2">
+        <span class="card-num">05</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 11l3 3L22 4"/>
+            <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Inspections &amp; Maintenance</h3>
+        <p class="card-desc">Thorough electrical inspections for homes, businesses, and property sales. We identify issues before they become costly problems and keep your system in peak condition.</p>
+      </div>
+
+      <!-- 06 -->
+      <div class="service-card reveal reveal-delay-3">
+        <span class="card-num">06</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+            <polyline points="9 22 9 12 15 12 15 22"/>
+          </svg>
+        </div>
+        <h3 class="card-title">New Construction Electrical</h3>
+        <p class="card-desc">Full electrical fit-out for new builds. We work with contractors and architects from rough-in through final inspection, ensuring everything is code-compliant and on schedule.</p>
+      </div>
+
+      <!-- 07 -->
+      <div class="service-card reveal reveal-delay-1">
+        <span class="card-num">07</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+            <path d="M8 11l2 2 4-4"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Ceiling Fan Installation</h3>
+        <p class="card-desc">Expert ceiling fan installation and replacement. We handle all wiring, bracing, and balancing to ensure smooth, safe, and quiet operation in any room.</p>
+      </div>
+
+      <!-- 08 -->
+      <div class="service-card reveal reveal-delay-2">
+        <span class="card-num">08</span>
+        <div class="card-icon">
+          <svg viewBox="0 0 24 24">
+            <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>
+          </svg>
+        </div>
+        <h3 class="card-title">Modern Electrical Design</h3>
+        <p class="card-desc">Smart home integration, automated lighting systems, and custom electrical layouts designed for modern living. Future-ready solutions tailored to your lifestyle.</p>
+      </div>
+
+      <!-- 09 — Emergency -->
+      <div class="service-card reveal reveal-delay-3" style="background: rgba(245,197,24,0.06); border-left: 3px solid var(--yellow);">
+        <span class="card-num" style="color: rgba(245,197,24,0.15);">09</span>
+        <div class="card-icon" style="background: rgba(245,197,24,0.2);">
+          <svg viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"/>
+            <line x1="12" y1="8" x2="12" y2="12"/>
+            <line x1="12" y1="16" x2="12.01" y2="16"/>
+          </svg>
+        </div>
+        <h3 class="card-title" style="color: var(--yellow);">Emergency Electrical Repairs</h3>
+        <p class="card-desc">Power outages, sparking outlets, tripped breakers — we respond fast, 24 hours a day, 7 days a week. Don't wait on an electrical emergency.</p>
+        <span class="card-arrow" style="opacity:1; transform: none;">Call Now: +233 450 4012 →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── ABOUT ─────────────────────────────────────────────────────────────────── -->
+<section id="about">
+  <div class="container">
+    <div class="about-grid">
+
+      <div class="about-img reveal">
+        <div class="circuit-art">
+          <svg class="circuit-svg" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+            <!-- Decorative circuit paths -->
+            <g stroke="#F5C518" stroke-width="1.5" fill="none" opacity="0.7">
+              <path d="M30 150 H80 V80 H150"/>
+              <path d="M150 80 H220 V150 H260"/>
+              <path d="M150 150 V220 H80 V270"/>
+              <path d="M150 220 H220 V270"/>
+              <path d="M150 150 H30"/>
+              <!-- Resistors (zig-zag) -->
+              <path d="M80 150 L90 140 L100 160 L110 140 L120 160 L130 140 L140 150" stroke-width="2"/>
+              <!-- Circles for nodes -->
+            </g>
+            <g fill="#F5C518">
+              <circle cx="80" cy="80" r="5"/>
+              <circle cx="150" cy="80" r="5"/>
+              <circle cx="150" cy="150" r="10"/>
+              <circle cx="220" cy="150" r="5"/>
+              <circle cx="80" cy="220" r="5"/>
+              <circle cx="220" cy="220" r="5"/>
+            </g>
+            <!-- Big bolt -->
+            <path d="M165 120 L145 155 H160 L140 185 L175 148 H158 Z" fill="#F5C518" opacity="0.9"/>
+            <!-- Text label -->
+            <text x="150" y="30" text-anchor="middle" font-size="11" fill="#F5C518" opacity="0.5" font-family="monospace">WIRE TECH</text>
+          </svg>
+        </div>
+      </div>
+
+      <div class="reveal reveal-delay-2">
+        <p class="section-label">About Wire Tech</p>
+        <h2 class="section-title">Trusted Electrical Experts Since 2023</h2>
+        <p class="section-sub" style="margin-bottom: 20px;">
+          Wire Tech Electrical has been powering homes and businesses for over 3 years.
+          Our team of expert electricians brings precision, professionalism, and pride
+          to every job, no matter the size.
+        </p>
+        <p class="section-sub">
+          We believe electrical work should be done right the first time. That means clean
+          installations, clear communication, and guaranteed satisfaction on every project.
+        </p>
+
+        <div class="stats-row">
+          <div class="stat-box">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Years in Business</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">400+</div>
+            <div class="stat-label">Projects Completed</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">100%</div>
+            <div class="stat-label">Code Compliant</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-value">24/7</div>
+            <div class="stat-label">Emergency Available</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── WHY US ────────────────────────────────────────────────────────────────── -->
+<section id="why">
+  <div class="container">
+    <div class="why-head reveal">
+      <p class="section-label">Why Wire Tech</p>
+      <h2 class="section-title">The Wire Tech Difference</h2>
+      <p class="section-sub">We don't just fix problems, we build long-term relationships built on trust, quality, and reliability.</p>
+    </div>
+
+    <div class="why-grid">
+      <div class="why-card reveal reveal-delay-1">
+        <span class="why-icon">⚡</span>
+        <h3 class="why-title">Fast Response</h3>
+        <p class="why-desc">Same-day service for most jobs. Emergency calls answered within the hour, because we know electrical issues can't wait.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-2">
+        <span class="why-icon">🔒</span>
+        <h3 class="why-title">Safety First</h3>
+        <p class="why-desc">Every job is done to NEC code. We don't cut corners, your family's safety and your property's integrity are non-negotiable.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-3">
+        <span class="why-icon">💰</span>
+        <h3 class="why-title">Transparent Pricing</h3>
+        <p class="why-desc">No surprise charges. You get a detailed quote upfront and we stick to it. Honest pricing, honest work.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-1">
+        <span class="why-icon">🏆</span>
+        <h3 class="why-title">Certified Professionals</h3>
+        <p class="why-desc">All our electricians are background-checked, and continuously trained on the latest electrical standards.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-2">
+        <span class="why-icon">🔧</span>
+        <h3 class="why-title">Guaranteed Workmanship</h3>
+        <p class="why-desc">We back every job with a full workmanship guarantee. If something isn't right, we come back and fix it, no questions asked.</p>
+      </div>
+
+      <div class="why-card reveal reveal-delay-3">
+        <span class="why-icon">📱</span>
+        <h3 class="why-title">Easy Communication</h3>
+        <p class="why-desc">Real updates, real people. We keep you informed at every step, no chasing us for answers about your own project.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── CONTACT / CTA ─────────────────────────────────────────────────────────── -->
+<section id="contact">
+  <div class="container">
+    <div class="cta-box reveal">
+      <div class="cta-text">
+        <h2 class="cta-headline">Ready to Power <span class="accent">Your Project?</span></h2>
+        <p class="cta-sub">
+          Whether it's a quick repair or a full electrical overhaul, Wire Tech is ready.
+          Get a free, no-obligation quote today.
+        </p>
+      </div>
+      <div class="cta-actions">
+        <div class="phone-tag">
+          <svg viewBox="0 0 24 24">
+            <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12a19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 3.6 1.28h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.96a16 16 0 0 0 6.13 6.13l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/>
+          </svg>
+          +233 450 4012
+        </div>
+        <a href="mailto:info@wiretechelectrical.com" class="btn-primary">Send Us a Message →</a>
+        <p style="font-size: 12px; color: var(--mid-grey);">Mon–Sun 7am–7pm · Emergency: 24/7</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ─── FOOTER ────────────────────────────────────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
+        <div class="logo-icon" style="width:32px; height:32px;">
+          <svg style="width:16px; height:16px; fill:var(--black);" viewBox="0 0 24 24">
+            <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z"/>
+          </svg>
+        </div>
+        <span style="font-family: var(--font-display); font-size:15px; font-weight:600; letter-spacing:1px; color: var(--white);">WIRE<span style="color:var(--yellow);">TECH</span></span>
+      </div>
+      <p class="footer-copy">© 2025 Wire Tech Electrical. All rights reserved.</p>
+      <p class="footer-copy" style="margin-top:4px;">Licensed Electrical Contractor · Fully Insured</p>
+    </div>
+
+    <ul class="footer-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#why">Why Us</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</footer>
+
+
+<!-- ─── JAVASCRIPT ──────────────────────────────────────────────────────────── -->
+<script>
+  /* ── Scroll Reveal ──────────────────────────────────────────────────── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+
+  /* ── Nav Sticky Style ───────────────────────────────────────────────── */
+  // (handled via CSS backdrop-filter — nothing extra needed)
+
+
+  /* ── Mobile Nav Toggle ──────────────────────────────────────────────── */
+  function toggleNav() {
+    document.getElementById('mainNav').classList.toggle('open');
+  }
+
+  // Close on link click
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.getElementById('mainNav').classList.remove('open');
+    });
+  });
+
+
+  /* ── Smooth counter animation on stats ─────────────────────────────── */
+  const counters = document.querySelectorAll('.stat-value');
+  const counterObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const el = entry.target;
+        const text = el.textContent;
+        const numMatch = text.match(/[\d,]+/);
+        if (!numMatch) return;
+
+        const target = parseInt(numMatch[0].replace(',', ''));
+        const suffix = text.replace(numMatch[0], '').replace(',', '');
+        let current = 0;
+        const step = Math.ceil(target / 40);
+        const timer = setInterval(() => {
+          current = Math.min(current + step, target);
+          el.textContent = current.toLocaleString() + suffix;
+          if (current >= target) clearInterval(timer);
+        }, 40);
+
+        counterObserver.unobserve(el);
+      }
+    });
+  }, { threshold: 0.5 });
+
+  counters.forEach(c => counterObserver.observe(c));
+</script>
+
+</body>
+</html>
